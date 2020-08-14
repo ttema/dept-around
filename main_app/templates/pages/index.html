@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dept-Around</title>
+    <link href="{% static 'theme.css' %}" rel="stylesheet">
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,300,700,100' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:300,700,900,500' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="{% static 'smlogo.png' %}" type="logo-base/png">
+</head>
+<body>
+<header id="home">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-xs-5">
+                                <img src="{% static 'img/logo.png' %}" alt="" class="img-responsive">
+                        </div>
+                    </div>
+                    <div class="jumbotron">
+                        <h1><strong>Debt</strong></br>
+						<small>Around</small></h1>
+                        <p>Простой и удобный сервис контроля над задолженностями</p>
+                        <a class="major btn-major btn-lg" href="{% url 'login' %}">Вход<i class="fa fa-arrow-circle-o-right"></i> </a>
+                        <a class="major btn-major btn-lg" href="{% url 'signup' %}">Регистрация<i class="fa fa-arrow-circle-o-right"></i> </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+<section id="feat">
+            <div class="container">
+                <div class="row features">
+                    <div class="col-md-4 text-center wow fadeInUp" data-wow-delay="100ms">
+                        <img src="{% static 'img/pen.png' %}" alt="" width="100px" height="100px">
+                        <h4>Отложенный платеж</h4>
+                        <p>Нет времени расчитаться за кофе со своими коллегами? Создай отложенный платеж и оплати его позже!</p>
+                    </div>
+                    <div class="col-md-4 text-center wow fadeInUp" data-wow-delay="300ms">
+                        <img src="{% static 'img/money.png' %}" alt="" width="100px" height="100px">
+                        <h4>Яндекс.Деньги</h4>
+                        <p>Плати сразу при помощи интеграции с сервисом Яндекс.Деньги!</p>
+                    </div>
+                    <div class="col-md-4 text-center wow fadeInUp" data-wow-delay="500ms">
+                        <img src="{% static 'img/users.png' %}" alt="" width="130px" height="100px">
+                        <h4>Участники</h4>
+                        <p>Если в событии принимало участие несколько человек, укажите каждого при создании отложенного платежа!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="news" class="blog wow fadeInUp" data-wow-delay="300ms">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h2>C Debt Around вы ничего не упустите!</h2>
+                        <h4>В скором течении рабочего дня, не сложно что-то упустить из своей головы. Предоставьте возможность контролировать Ваши задолженоости - Нам! Простой и в тоже время удобный интерфейс всегда у Вас под рукой.</h4>
+                        <p>Наша база данных, в отличии от памяти челоека, - безгранична! Вы можете создавать неограниченное колличество событий, но в целях удобства не забывайте закрывать уже погашенную задолженность. Так чего же мы ждём?</p>
+                        <a class="btn btn-danger btn-lg" href="{% url 'signup' %}">Начать!<i class="fa fa-arrow-circle-o-right"></i> </a>
+                    </div>
+                    <div class="col-md-5">
+                            <img src="{% static 'img/mujik.PNG' %}" alt="Солидный мужчина, смотрящий вверх" class="img-responsive">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="clients wow fadeInUp" data-wow-delay="300ms">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2" data-wow-delay="100ms">
+                        <img src="{% static 'img/logo-sample-01.jpg' %}" class="img-responsive" />
+                    </div>
+                    <div class="col-md-2" data-wow-delay="300ms">
+                         <img src="{% static 'img/logo-sample-02.jpg' %}" class="img-responsive" />
+                    </div>
+                    <div class="col-md-2-plus" data-wow-delay="500ms">
+                        <img src="{% static 'img/logo-sample-03.png' %}" class="img-responsive"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h3>Debt Around</h3>
+                        <p>Школа Программистов © 2020 </p>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="text-right social"><i class="typcn typcn-social-facebook-circular"></i><i class="typcn typcn-social-twitter-circular"></i><i class="typcn typcn-social-tumbler-circular"></i><i class="typcn typcn-social-github-circular"></i><i class="typcn typcn-social-dribbble-circular"></i></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    <style type="text/css">#hellopreloader>p{display:none;}#hellopreloader_preload{display: block;position: fixed;z-index: 99999;top: 0;left: 0;width: 100%;height: 100%;min-width: 500px;background: #333 url(http://hello-site.ru//main/images/preloads/spinning-circles.svg) center center no-repeat;background-size:150px;}</style>
+    <div id="hellopreloader"><div id="hellopreloader_preload"></div></div>
+    <script type="text/javascript">var hellopreloader = document.getElementById("hellopreloader_preload");function fadeOutnojquery(el){el.style.opacity = 1;var interhellopreloader = setInterval(function(){el.style.opacity = el.style.opacity - 0.05;if (el.style.opacity <=0.05){ clearInterval(interhellopreloader);hellopreloader.style.display = "none";}},16);}window.onload = function(){setTimeout(function(){fadeOutnojquery(hellopreloader);},1000);};</script>
+</body>
+</html>

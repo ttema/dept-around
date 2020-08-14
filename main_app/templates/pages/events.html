@@ -1,0 +1,243 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Events</title>
+    <link href="{% static 'styles/nav.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'smlogo.png' %}" type="logo-base/png">
+</head>
+
+<body>
+<nav class="nav">
+        <div class="container">
+              <a href="{% url 'index' %}"><img src="{% static 'img/logo.png' %}" alt="" class="img-responsive" width="262,5px" height="83,48px"></a>
+            <div id="mainListDiv" class="main_list">
+                <ul class="navlinks">
+                    <li><a href="{% url 'events' %}">Мои события</a></li>
+                    <li><a href="{% url 'docs' %}">Документация</a></li>
+                    <li><a href="{% url 'logout' %}">Выйти</a></li>
+                </ul>
+            </div>
+            <span class="navTrigger">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+        </div>
+
+    </nav>
+<div class="login-page">
+  <div class="form">
+      <p><b>Мои события</b></p><Br>
+    <a href="{% url 'create_event' %}"><button>Добавить событие</button></a>
+
+      <a href="{% url 'ev_sort_by_date' %}"><button>Отсортировать по дате</button></a>
+      <a href="{% url 'events' %}"><button>Отсортировать по мере добавления</button></a>
+      {% for event in events_list %}
+          <div CLASS="box">
+              <a href="{% url 'event' event.uni_id %}"><p>{{ event.name }}</p></a>
+              <p>{{ event.description }}</p>
+              <p>{{ event.event_date }}</p>
+              <a href="{% url 'delete_event' event.uni_id %}"><button>>Удалить</button>
+          </div>
+      {% endfor %}
+    </form>
+  </div>
+</div>
+<style>
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.box{
+    border-radius: 3px;
+    border-color: #000000;
+    background-color: #eeeeee;
+    margin: auto;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    border-width: 5px;
+}
+p{
+    font-size: 20px;
+}
+.login-page {
+  width: 660px;
+  padding: 25% 0 0;
+  margin: auto;
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 1000px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 35px;
+  font-size: 30px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #ccffff;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #000000;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #a0ffff;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #00b7ff;
+  text-decoration: none;
+}
+.link{
+    color: #000000;
+  text-decoration: none;
+}
+.form .register-form {
+  display: none;
+}
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+.container:before, .container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.container .info {
+  margin: auto;
+  text-align: center;
+}
+.container .info h1 {
+  font-size: 36px;
+  font-weight: 300;
+  color: #1a1a1a;
+}
+.container .info span {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+.container .info span a {
+  color: #000000;
+  text-decoration: none;
+}
+.container .info span .fa {
+  color: #EF3B3A;
+}
+.img-responsive{
+  border-left: px solid transparent;
+}
+body {
+  background-image: url('https://avatars.mds.yandex.net/get-pdb/1704142/84716377-d4c5-42f7-949e-5709e5866c7e/orig');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.table_sort table {
+    border-collapse: collapse;
+}
+
+.table_sort th {
+    color: #000000;
+    background:  #ccffff;
+    cursor: pointer;
+}
+
+.table_sort td,
+.table_sort th {
+    width: 150px;
+    height: 40px;
+    text-align: center;
+    border: 2px solid #846868;
+    font-size: 18px;
+}
+
+.table_sort tbody tr:nth-child(even) {
+    background: #e3e3e3;
+}
+
+th.sorted[data-order="1"],
+th.sorted[data-order="-1"] {
+    position: relative;
+}
+
+th.sorted[data-order="1"]::after,
+th.sorted[data-order="-1"]::after {
+    right: 8px;
+    position: absolute;
+}
+
+th.sorted[data-order="-1"]::after {
+	content: "▼"
+}
+
+th.sorted[data-order="1"]::after {
+	content: "▲"
+}
+</style>
+<script>
+    $('.message a').click(function(){
+   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+});
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+    const getSort = ({ target }) => {
+        const order = (target.dataset.order = -(target.dataset.order || -1));
+        const index = [...target.parentNode.cells].indexOf(target);
+        const collator = new Intl.Collator(['en', 'ru'], { numeric: true });
+        const comparator = (index, order) => (a, b) => order * collator.compare(
+            a.children[index].innerHTML,
+            b.children[index].innerHTML
+        );
+
+        for(const tBody of target.closest('table').tBodies)
+            tBody.append(...[...tBody.rows].sort(comparator(index, order)));
+
+        for(const cell of target.parentNode.cells)
+            cell.classList.toggle('sorted', cell === target);
+    };
+
+    document.querySelectorAll('.table_sort thead').forEach(tableTH => tableTH.addEventListener('click', () => getSort(event)));
+
+});
+</script>
+
+
+</html>
+
+

@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add_payment</title>
+    <link href="{% static 'styles/nav.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'smlogo.png' %}" type="logo-base/png">
+</head>
+
+<body>
+<nav class="nav">
+        <div class="container">
+              <a href="{% url 'index' %}"><img src="{% static 'img/logo.png'%}" alt="" class="img-responsive" width="262,5px" height="83,48px"></a>
+            <div id="mainListDiv" class="main_list">
+                <ul class="navlinks">
+                    <li><a href="{% url 'events' %}">Мои события</a></li>
+                    <li><a href="{% url 'docs' %}">Документация</a></li>
+                    <li><a href="{% url 'logout' %}">Выйти</a></li>
+                </ul>
+            </div>
+            <span class="navTrigger">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+        </div>
+
+    </nav>
+<div class="login-page">
+  <div class="form">
+      <p><b>{{ event.name }}</b></p><Br>
+      <h2>{{ event.description }}</h2><Br>
+      <p>{{ event.event_date }}</p>
+
+      <p><b>Платежи</b></p><Br>
+      <a href="{% url 'create_payment' event.uni_id %}"><button>Добавить платёж</button></a>
+      <a href="{% url 'event' event.uni_id %}"><button>Отсортировать по мере добавления</button></a>
+      <a href="{% url 'pay_date_sort' event.uni_id %}"><button>Отсортировать по дате выдачи</button></a>
+      <a href="{% url 'pay_sum_sort' event.uni_id %}"><button>Отсортировать по исходной сумме платежа</button></a>
+      {% for payment in payments %}
+      <div CLASS="box">
+          <p>{{ payment.name }}</p>
+          <p>{{ payment.description }}</p>
+          <p>Дата платежа: {{ payment.payment_date }}</p><Br>
+          <p>Сумма платежа с процентами: <b>{{ payment.sum_with_percents }}</b></p><Br>
+          <p>Исходная сумма платежа: {{ payment.total_loan_sum }}</p><Br>
+          <p>Кредитор: {{ payment.creditor }}</p><Br>
+          <p>Участники: {{ payment.participants }}</p><Br>
+          <p>Создатель: {{ payment.creator }}</p><Br>
+          <p>Перевести на : {{ payment.destination }}</p>
+          <iframe src="https://money.yandex.ru/quickpay/shop-widget?writer=seller&targets=%D0%9F%D0%BE%D0%B3%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%B4%D0%BE%D0%BB%D0%B3%D0%B0&targets-hint=&default-sum=&button-text=11&payment-type-choice=on&mobile-payment-type-choice=on&fio=on&comment=on&hint=%D0%9D%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%20%D1%81%D0%BE%D0%B1%D1%8B%D1%82%D0%B8%D1%8F&successURL=&quickpay=shop&account=4100112599782466" width="100%" height="313" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+          <a href="{% url 'delete_payment' payment.id %}"><button>Удалить</button></a>
+          <script src="https://yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+            <script src="https://yastatic.net/share2/share.js"></script>
+            <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,twitter,viber,whatsapp,telegram" data-size="s" data-title="{{ payment.name }}" data-description="{{ payment.description }}"></div>
+      </div>
+      {% endfor %}
+  </div>
+</div>
+<style>
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.box{
+    border-radius: 3px;
+    border-color: #000000;
+    background-color: #eeeeee;
+    margin: auto;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    border-width: 5px;
+}
+p{
+    font-size: 20px;
+}
+.login-page {
+  width: 660px;
+  padding: 25% 0 0;
+  margin: auto;
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 560px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 35px;
+  font-size: 30px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #ccffff;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #000000;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #a0ffff;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #00b7ff;
+  text-decoration: none;
+}
+.form .register-form {
+  display: none;
+}
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+.container:before, .container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.container .info {
+  margin: auto;
+  text-align: center;
+}
+.container .info h1 {
+  font-size: 36px;
+  font-weight: 300;
+  color: #1a1a1a;
+}
+.container .info span {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+.container .info span a {
+  color: #000000;
+  text-decoration: none;
+}
+.container .info span .fa {
+  color: #EF3B3A;
+}
+.img-responsive{
+  border-left: px solid transparent;
+}
+body {
+  background-image: url('https://avatars.mds.yandex.net/get-pdb/1704142/84716377-d4c5-42f7-949e-5709e5866c7e/orig');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+</style>
+<script>
+
+    $('.message a').click(function(){
+   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+});
+
+</script>
+<script>
+
+</script>
+
+</html>
